@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="LibraryManagementSystem.UserTransaction"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LibraryManagementSystem"
+             
+             mc:Ignorable="d" 
+             d:DesignHeight="362" d:DesignWidth="655">
+
+    <!-- ОБЪЯВЛЕНИЕ РЕСУРСОВ -->
+    <UserControl.Resources>
+        <local:AlternatingRowConverter x:Key="AlternatingRowConverter"/>
+    </UserControl.Resources>
+
+
+    <Grid>
+        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
+            <TabItem Header="Запрошенные книги">
+                <Grid>
+                    <DataGrid IsReadOnly="True" Name="dgRequest" AutoGenerateColumns="False"
+                              AlternationCount="3"
+                              Background="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"
+                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                            </Style>
+                        </DataGrid.RowStyle>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Book Id" Binding="{Binding BookId}"/>
+                            <DataGridTextColumn Header="Book Name" Binding="{Binding BookName}"/>
+                            <DataGridTextColumn Header="Requested Date" Binding="{Binding DateRequested}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Полученные книги">
+                <Grid>
+                    <DataGrid IsReadOnly="True" Name="dgReturn" AutoGenerateColumns="False" 
+                              AlternationCount="3"
+                              Background="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"
+                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                            </Style>
+                        </DataGrid.RowStyle>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Book Id" Binding="{Binding BookId}"/>
+                            <DataGridTextColumn Header="Book Name" Binding="{Binding BookName}"/>
+                            <DataGridTextColumn Header="Received Date" Binding="{Binding DateRecieved}"/>
+                            <DataGridTemplateColumn Header="Actions">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="BtnReturn" Content=" Return " Click="BtnReturn_Click"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

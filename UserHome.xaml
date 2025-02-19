@@ -1,0 +1,100 @@
+﻿<Window x:Class="LibraryManagementSystem.UserHome"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        Title="User Home"
+        Height="450"
+        Width="1000"
+        WindowStartupLocation="CenterScreen">
+
+    <!-- Ресурсы окна -->
+    <Window.Resources>
+        <!-- Стиль для кнопок навбара -->
+        <Style x:Key="NavBarButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="20,10"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <!-- Триггеры для анимации -->
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="#FF555555"
+                                            Duration="0:0:0.2"
+                                            Storyboard.TargetProperty="Background.Color"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="Transparent"
+                                            Duration="0:0:0.2"
+                                            Storyboard.TargetProperty="Background.Color"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <!-- Затемнённый прямоугольник -->
+        <Rectangle Fill="Black" Opacity="0.5"/>
+
+        <!-- Заголовок -->
+        <Label Content="Добро пожаловать!"
+               FontWeight="Bold"
+               FontSize="24"
+               VerticalAlignment="Top"
+               HorizontalAlignment="Center"
+               Foreground="White"
+               Margin="0,15,0,0"/>
+
+        <!-- Карточка с контентом -->
+        <materialDesign:Card Width="824" Height="350" Margin="0,60,0,24" HorizontalAlignment="Center">
+            <StackPanel Name="userStackPanel">
+                <!-- Сюда можно добавить элементы с данными пользователя -->
+            </StackPanel>
+        </materialDesign:Card>
+
+        <!-- Навбар с кнопками -->
+        <DockPanel VerticalAlignment="Top" Height="50" Background="#FF333333">
+            <Button Content="Взять книгу"
+                    DockPanel.Dock="Left"
+                    Style="{StaticResource NavBarButtonStyle}"
+                    Click="BtnBorrow_Click" Margin="90 0 30 0"/>
+
+            <Button Content="Транзакции"
+                    DockPanel.Dock="Left"
+                    Style="{StaticResource NavBarButtonStyle}"
+                    Click="BtnTransaction_Click"/>
+
+            <Button Content="Выход"
+                    DockPanel.Dock="Right"
+                    Style="{StaticResource NavBarButtonStyle}"
+                    Click="BtnLogout_Click" Width="100" Margin="340 0 0 0"/>
+        </DockPanel>
+    </Grid>
+</Window>
